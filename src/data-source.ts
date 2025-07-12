@@ -8,7 +8,7 @@ import { DB_MYSQL_HOST,
 } from "./config"
 
 
-export const MySQLLockerDataSource = new DataSource({
+export const MySQLDataSource = new DataSource({
     type: "mysql",
     host: DB_MYSQL_HOST,
     port: DB_MYSQL_PORT,

@@ -1,4 +1,4 @@
-import {  MySQLLockerDataSource } from "./data-source"
+import {  MySQLDataSource } from "./data-source"
 import { port } from "./config"
 import app from "./app"
 import { runScheduler } from "./scheduler";
@@ -6,8 +6,8 @@ import { consumeRMQMessages } from "./queue/rmq-pubsub";
 
 (async() => {
 
-    if (!MySQLLockerDataSource.isInitialized) {
-        MySQLLockerDataSource.initialize().then(async() => {
+    if (!MySQLDataSource.isInitialized) {
+        MySQLDataSource.initialize().then(async() => {
             // start express server
             app.listen(port)
             console.log(`Express server has started on port ${port}`)
