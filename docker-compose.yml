@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  api:
+    container_name: api-express-typeorm
+    build:
+      dockerfile: Dockerfile
+      context: .
+      # Only will build development stage from our dockerfil
+    volumes:
+      - .:/usr/src
+    env_file:
+    - .env
+    # Run a command against the development stage of the image
+    command: npm run start
+    ports:
+      - 5000:5000
+    networks:
+      - project-network
+    restart: always
+
+  socket-io-server:
+    container_name: socket-io
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src
+    command: npm run start
+    networks:
+      - project-network
+    restart: always
+
+networks:
+  project-network:
+    driver: bridge
